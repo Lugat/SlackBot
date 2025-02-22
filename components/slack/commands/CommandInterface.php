@@ -2,9 +2,7 @@
 
 namespace app\components\slack\commands;
 
-abstract class CommandInterface
+interface CommandInterface
 {
-    
-    abstract public function execute(?string $text): array|string;
-
+    public function execute(string $text): array|string;
 }

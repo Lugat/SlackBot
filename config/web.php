@@ -6,7 +6,6 @@ use app\components\slack\commands\UuidCommand;
 use app\components\mistral\Mistral;
 use app\components\slack\commands\JokeCommand;
 use app\components\slack\commands\PasswordCommand;
-use app\components\slack\routines\BirthdayRoutine;
 
 $config = [
     'id' => 'slack',

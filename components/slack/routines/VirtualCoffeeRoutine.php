@@ -2,9 +2,9 @@
 
 namespace app\components\slack\routines;
 
-use yii\base\Component;
+use yii\base\BaseObject;
 
-class VirtualCoffeeRoutine extends Component implements RoutineInterface
+class VirtualCoffeeRoutine extends BaseObject implements RoutineInterface
 {
 
     public function execute(): null|array|string

@@ -63,7 +63,7 @@ class Routine extends \yii\db\ActiveRecord
 
         $date = new \DateTime;
         $date->setTimezone(new \DateTimeZone($this->timezone));
-
+        
         return CronExpression::factory($this->expression)->isDue($date);
 
     }
@@ -79,9 +79,6 @@ class Routine extends \yii\db\ActiveRecord
         if (null !== $routine) {
 
             $message = $routine->execute();
-
-            var_dump($message);
-            exit();
 
             if (null === $message) {
                 return;

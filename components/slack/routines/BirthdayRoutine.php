@@ -4,8 +4,9 @@ namespace app\components\slack\routines;
 
 use Yii;
 use app\models\User;
+use yii\base\BaseObject;
 
-class BirthdayRoutine implements RoutineInterface
+class BirthdayRoutine extends BaseObject implements RoutineInterface
 {
 
     public function execute(): null|array|string

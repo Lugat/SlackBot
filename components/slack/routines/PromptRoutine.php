@@ -3,9 +3,9 @@
 namespace app\components\slack\routines;
 
 use Yii;
-use yii\base\Component;
+use yii\base\BaseObject;
 
-class PromptRoutine extends Component implements RoutineInterface
+class PromptRoutine extends BaseObject implements RoutineInterface
 {
 
     public string $prompt;

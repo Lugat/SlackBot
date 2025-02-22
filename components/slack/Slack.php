@@ -4,7 +4,7 @@ namespace app\components\slack;
 
 use Yii;
 use app\components\AbstractApi;
-use app\components\slack\commands\AbstractCommand;
+use app\components\slack\commands\CommandInterface;
 
 class Slack extends AbstractApi
 {
@@ -42,7 +42,7 @@ class Slack extends AbstractApi
         return $response['members'] ?? [];
     }
     
-    public function getCommand(string $command): ?AbstractCommand
+    public function getCommand(string $command): ?CommandInterface
     {
 
         if (array_key_exists($command, $this->commands)) {

@@ -2,12 +2,14 @@
 
 namespace app\components\slack\commands;
 
-class PasswordCommand extends AbstractCommand
+use yii\base\BaseObject;
+
+class PasswordCommand extends BaseObject implements CommandInterface
 {
 
     public int $length;
 
-    public function execute(?string $text): array|string
+    public function execute(string $text): array|string
     {
 
         if (preg_match('/(\d+)/', $text, $matches)) {

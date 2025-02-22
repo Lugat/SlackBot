@@ -3,13 +3,14 @@
 namespace app\components\slack\commands;
 
 use Symfony\Component\Uid\Uuid;
+use yii\base\BaseObject;
 
-class UuidCommand extends AbstractCommand
+class UuidCommand extends BaseObject implements CommandInterface
 {
 
     public int $version;
 
-    public function execute(?string $text): array|string
+    public function execute(string $text): array|string
     {
 
         $version = 'v'.$this->version;
