@@ -10,21 +10,28 @@ abstract class AbstractAssistant extends AbstractApi
     public string $model;
     public float $temperature; 
 
+    const EVENT_PROMPT = 'prompt';
+
     public function getBearer(): string
     {
         return $this->apiKey;
     }
 
-    public function prompt(string $prompt): array
+    public function prompt(string $prompt, ?float $termperature = null): array
     {
+
+        $event = new PromptEvent([
+            'messages' => [
+                ['role' => 'user', 'content' => $prompt]
+            ]
+        ]);
+
+        $this->trigger(self::EVENT_PROMPT, $event);
 
         $response = $this->request(self::POST, 'chat/completions', [
             'model' => $this->model,
-            'messages' => [
-                ['role' => 'system', 'content' => 'You are a helpful assistant.'],
-                ['role' => 'user', 'content' => $prompt]
-            ],
-            'temperature' => $this->temperature
+            'messages' => $event->messages,
+            'temperature' => $termperature ?? $this->temperature
         ]);
 
         return $response['choices'] ?? [];
