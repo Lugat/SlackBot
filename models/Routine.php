@@ -39,6 +39,7 @@ class Routine extends \yii\db\ActiveRecord
             [['class'], 'string', 'max' => 128],
             [['channel', 'timezone', 'expression'], 'string', 'max' => 32],
             [['team_id', 'channel', 'class', 'timezone', 'expression'], 'unique'],
+            [['active'], 'integer'],
         ];
     }
 

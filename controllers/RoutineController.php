@@ -11,7 +11,7 @@ class RoutineController extends Controller
     public function actionIndex()
     {
 
-        $routines = Routine::find()->all();
+        $routines = Routine::find()->andWhere(['active' => 1])->all();
         foreach ($routines as $routine) {
 
             if (true === $routine->isDue) {

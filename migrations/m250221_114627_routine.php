@@ -17,6 +17,7 @@ class m250221_114627_routine extends Migration
             'timezone' => $this->string(32)->notNull(),
             'expression' => $this->string(32)->notNull(),
             'config' => $this->text()->notNull(),
+            'active' => $this->tinyInteger()->notNull()->defaultValue(0),
             'UNIQUE KEY(`team_id`, `channel`, `class`, `timezone`, `expression`)'
         ]);
     }
