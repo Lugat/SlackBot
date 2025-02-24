@@ -17,10 +17,12 @@ abstract class AbstractAssistant extends AbstractApi
         return $this->apiKey;
     }
 
-    public function prompt(string $prompt, ?float $termperature = null): array
+    public function prompt(string $prompt, ?float $temperature = null): array
     {
 
         $event = new PromptEvent([
+            'model' => $this->model,
+            'temperature' => $temperature ?? $this->temperature,
             'messages' => [
                 ['role' => 'user', 'content' => $prompt]
             ]
@@ -29,9 +31,9 @@ abstract class AbstractAssistant extends AbstractApi
         $this->trigger(self::EVENT_PROMPT, $event);
 
         $response = $this->request(self::POST, 'chat/completions', [
-            'model' => $this->model,
+            'model' => $event->model,
             'messages' => $event->messages,
-            'temperature' => $termperature ?? $this->temperature
+            'temperature' => $event->temperature
         ]);
 
         return $response['choices'] ?? [];
