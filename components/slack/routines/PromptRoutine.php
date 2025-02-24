@@ -13,7 +13,7 @@ class PromptRoutine extends BaseObject implements RoutineInterface
     public function execute(): null|array|string
     {
 
-        $response = Yii::$app->mistral->prompt($this->prompt);
+        $response = Yii::$app->assistant->prompt($this->prompt);
         
         return array_map(
             fn($respons) => trim($respons['message']['content'], '"'),

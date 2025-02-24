@@ -1,11 +1,10 @@
 <?php
 
-use app\components\chatGpt\ChatGpt;
 use app\components\slack\Slack;
 use app\components\slack\commands\UuidCommand;
-use app\components\mistral\Mistral;
 use app\components\slack\commands\JokeCommand;
 use app\components\slack\commands\PasswordCommand;
+use app\components\assistant\Mistral;
 
 $config = [
     'id' => 'slack',
@@ -33,17 +32,14 @@ $config = [
                 ]
             ]
         ],
-        'chatGpt' => [
-            'class' => ChatGpt::class,
-            'baseUri' => 'https://api.openai.com/v1/',
-            'model' => $_ENV['CHATGPT_MODEL'] ?? 'gpt-3.5-turbo',
-            'apiKey' => $_ENV['CHATGPT_API_KEY']
-        ],
-        'mistral' => [
+        'assistant' => [
+            //'class' => ChatGpt::class,
+            //'baseUri' => 'https://api.openai.com/v1/',
             'class' => Mistral::class,
             'baseUri' => 'https://api.mistral.ai/v1/',
-            'model' => $_ENV['MISTRAL_MODEL'] ?? 'mistral-small-latest',
-            'apiKey' => $_ENV['MISTRAL_API_KEY']
+            'apiKey' => $_ENV['MISTRAL_API_KEY'], 
+            'model' => $_ENV['MISTRAL_MODEL'],
+            'temperature' => $_ENV['MISTRAL_TEMPERATURE'],
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

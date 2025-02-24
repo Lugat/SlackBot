@@ -25,7 +25,6 @@
 
         $team = Team::findOne($this->teamId);
         if (null !== $team) {
-
             Yii::$app->user->login($team);
             Yii::$app->slack->sendMessage($this->channel, $this->message);
         }

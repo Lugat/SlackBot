@@ -16,6 +16,7 @@ use app\components\slack\MessageJob;
  * @property string $timezone
  * @property string $expression
  * @property string $config
+ * @property int $active
  */
 class Routine extends \yii\db\ActiveRecord
 {
