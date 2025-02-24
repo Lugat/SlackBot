@@ -51,7 +51,7 @@ $config = [
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'hyLBi22Vj_X-6wDKEzY_e6ZkdenPo7Ql',
+            'cookieValidationKey' => $_ENV['COOKIE_VALIDATION_KEY'],
             'enableCsrfValidation' => false,
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
