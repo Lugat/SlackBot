@@ -5,6 +5,7 @@ use app\components\slack\commands\UuidCommand;
 use app\components\slack\commands\JokeCommand;
 use app\components\slack\commands\PasswordCommand;
 use app\components\assistant\Mistral;
+use app\components\assistant\PromptEvent;
 
 $config = [
     'id' => 'slack',
@@ -40,6 +41,13 @@ $config = [
             'apiKey' => $_ENV['MISTRAL_API_KEY'], 
             'model' => $_ENV['MISTRAL_MODEL'],
             'temperature' => $_ENV['MISTRAL_TEMPERATURE'],
+            'on prompt' => function(PromptEvent $event) {
+
+                $event->messages = array_merge([
+                    ['role' => 'system', 'content' => 'You are a helpful and assistant.']
+                ], $event->messages);
+    
+            }
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
