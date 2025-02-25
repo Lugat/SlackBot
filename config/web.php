@@ -35,12 +35,8 @@ $config = [
         ],
         'assistant' => [
             //'class' => ChatGpt::class,
-            //'baseUri' => 'https://api.openai.com/v1/',
             'class' => Mistral::class,
-            'baseUri' => 'https://api.mistral.ai/v1/',
             'apiKey' => $_ENV['MISTRAL_API_KEY'], 
-            'model' => $_ENV['MISTRAL_MODEL'],
-            'temperature' => $_ENV['MISTRAL_TEMPERATURE'],
             'on prompt' => function(PromptEvent $event) {
 
                 $event->messages = array_merge([

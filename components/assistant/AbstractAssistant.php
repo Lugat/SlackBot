@@ -8,7 +8,7 @@ abstract class AbstractAssistant extends AbstractApi
 {
     public string $apiKey;
     public string $model;
-    public float $temperature; 
+    public float $temperature = .7; 
 
     const EVENT_PROMPT = 'prompt';
 
