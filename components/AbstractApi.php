@@ -18,19 +18,16 @@ abstract class AbstractApi extends Component
 
     public function init()
     {
-
-        $bearer = $this->getBearer();
-
         $this->client = new Client([
             'base_uri' => $this->baseUri,
             'headers' => [
-                'Authorization' => "Bearer {$bearer}",
+                'Authorization' => $this->getAuthorization(),
                 'Content-Type' => 'application/json'
             ]
         ]);
     }
 
-    abstract function getBearer(): string;
+    abstract function getAuthorization(): string;
 
     public function request(string $method, string $endpoint, array $params = [], array $options = []): array
     {

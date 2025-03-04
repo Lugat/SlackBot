@@ -14,24 +14,28 @@ class UuidCommand extends BaseObject implements CommandInterface
     {
 
         $version = 'v'.$this->version;
+        $n = 1;
 
         if (null !== $text && preg_match('/v\d/i', $text, $matches)) {
             $version = $matches[0];
+        }
+
+        if (null !== $text && preg_match('/x(\d{1,2})/i', $text, $matches)) {
+            $n = (int) $matches[1];
         }
 
         if (!method_exists(Uuid::class, $version)) {
             return 'UUID Version not supported.';
         }
 
-        $uuid = Uuid::$version();
+        $uuids = [];
 
-        return [
-            'Base32' => $uuid->toBase32(),
-            'Base58' => $uuid->toBase58(),
-            'Rfc4122' => $uuid->toRfc4122(),
-            'Hex' => $uuid->toHex(),
-            'String' => $uuid->toString(),
-        ];
+        for ($i = 0; $i < $n; $i++) {
+            $uuids[] = Uuid::$version()->toBase58();
+        }
+        
+        return $uuids;
+        
     }
 
 }

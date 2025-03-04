@@ -11,9 +11,9 @@ class Slack extends AbstractApi
     public array $commands = [];
     public string $token;
 
-    public function getBearer(): string
+    public function getAuthorization(): string
     {
-        return Yii::$app->user->identity->bot_token;
+        return 'Barear '.Yii::$app->user->identity->bot_token;
     }
 
     public function sendMessage(string $channel, string|array $message, array $options = []): array

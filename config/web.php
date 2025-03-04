@@ -4,8 +4,10 @@ use app\components\slack\Slack;
 use app\components\slack\commands\UuidCommand;
 use app\components\slack\commands\JokeCommand;
 use app\components\slack\commands\PasswordCommand;
+use app\components\slack\commands\TranslateCommand;
 use app\components\assistant\Mistral;
 use app\components\assistant\PromptEvent;
+use app\components\translator\Deepl;
 
 $config = [
     'id' => 'slack',
@@ -30,8 +32,15 @@ $config = [
                 '/password' => [
                     'class' => PasswordCommand::class,
                     'length' => 12
+                ],
+                '/translate' => [
+                    'class' => TranslateCommand::class,
                 ]
             ]
+        ],
+        'translator' => [
+            'class' => Deepl::class,
+            'apiKey' => $_ENV['DEEPL_API_KEY'],
         ],
         'assistant' => [
             //'class' => ChatGpt::class,
@@ -44,6 +53,9 @@ $config = [
                 ], $event->messages);
     
             }
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

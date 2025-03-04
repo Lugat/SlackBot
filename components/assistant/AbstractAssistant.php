@@ -12,9 +12,9 @@ abstract class AbstractAssistant extends AbstractApi
 
     const EVENT_PROMPT = 'prompt';
 
-    public function getBearer(): string
+    public function getAuthorization(): string
     {
-        return $this->apiKey;
+        return "Bearer {$this->apiKey}";
     }
 
     public function prompt(string $prompt, ?float $temperature = null): array
