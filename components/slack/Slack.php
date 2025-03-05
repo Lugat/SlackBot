@@ -9,11 +9,10 @@ use app\components\slack\commands\CommandInterface;
 class Slack extends AbstractApi
 {
     public array $commands = [];
-    public string $token;
 
     public function getAuthorization(): string
     {
-        return 'Barear '.Yii::$app->team->identity->bot_token;
+        return 'Bearer '.Yii::$app->team->identity->bot_token;
     }
 
     public function sendMessage(string $channel, string|array $message, array $options = []): array

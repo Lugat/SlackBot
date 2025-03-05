@@ -22,8 +22,8 @@ $config = [
                 ],
             ],
         ],
-        'user' => [
-            'class' => 'yii\web\User',
+        'team' => [
+            'class' => 'app\components\auth\Team',
             'identityClass' => 'app\models\Team',
             'enableSession' => false,
             'enableAutoLogin' => false,
