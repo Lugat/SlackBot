@@ -43,6 +43,10 @@ Will generate a password.
 
 Will translate a text into a specified target language.
 
+## Ask
+
+Will ask the AI assistant a question.
+
 # Routines
 
 Routines work similar to cronjobs. They will trigger a certain action based on a schedule. A routine is always bound to a channel.

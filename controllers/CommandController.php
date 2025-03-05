@@ -9,9 +9,12 @@ use yii\web\Response;
 
 use app\components\auth\BodyParamAuth;
 use app\components\auth\TeamAccessControl;
+use app\components\slack\commands\AbstractCommand;
 
 class CommandController extends Controller
 {
+
+    protected ?AbstractCommand $command = null;
 
     public function init()
     {
@@ -79,13 +82,14 @@ class CommandController extends Controller
 
         $params = Yii::$app->request->getBodyParams();
 
-        return [
+        return array_filter([
+            'response_type' => $this->command->responseType,
             'text' => strtr($result, [
                 '{user}' => $params['user_name'],
                 '{channel}' => $params['channel_name'],
                 '{team}' => $params['team_domain']
             ])
-        ];
+        ]);
         
     }
 
@@ -94,8 +98,8 @@ class CommandController extends Controller
 
         $params = Yii::$app->request->getBodyParams();
 
-        $command =  Yii::$app->slack->getCommand($params['command']);
-        if (null === $command) {
+        $this->command =  Yii::$app->slack->getCommand($params['command']);
+        if (null === $this->command) {
 
             return Yii::t('app', 'Command "{command}" not found.', [
                 'command' => $params['command']
@@ -103,7 +107,7 @@ class CommandController extends Controller
 
         }
 
-        return $command->execute($params['text']);
+        return $this->command->execute($params['text']);
 
     }
 
