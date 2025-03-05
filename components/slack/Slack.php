@@ -13,7 +13,7 @@ class Slack extends AbstractApi
 
     public function getAuthorization(): string
     {
-        return 'Barear '.Yii::$app->user->identity->bot_token;
+        return 'Barear '.Yii::$app->team->identity->bot_token;
     }
 
     public function sendMessage(string $channel, string|array $message, array $options = []): array

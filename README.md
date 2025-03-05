@@ -39,6 +39,10 @@ Will tell you a joke
 
 Will generate a password.
 
+## Translate
+
+Will translate a text into a specified target language.
+
 # Routines
 
 Routines work similar to cronjobs. They will trigger a certain action based on a schedule. A routine is always bound to a channel.

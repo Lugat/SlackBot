@@ -16,7 +16,7 @@ class VirtualCoffeeRoutine extends BaseObject implements RoutineInterface
 
         parent::init();
 
-        $this->cacheKey = get_called_class().'.'.Yii::$app->user->identity->id;
+        $this->cacheKey = get_called_class().'.'.Yii::$app->team->identity->id;
 
     }
 

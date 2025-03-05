@@ -2,9 +2,7 @@
 
 namespace app\components\slack\commands;
 
-use yii\base\BaseObject;
-
-class JokeCommand extends BaseObject implements CommandInterface
+class JokeCommand extends AbstractCommand implements CommandInterface
 {
 
     public function execute(string $text): array|string

@@ -13,7 +13,7 @@ class BirthdayRoutine extends BaseObject implements RoutineInterface
     {
 
         $users = User::find()->where([
-            'team_id' => Yii::$app->user->identity->id,
+            'team_id' => Yii::$app->team->identity->id,
         ])->andWhere(['LIKE', 'birthdate', date('%-m-d'), false])->all();
 
         if (empty($users)) {

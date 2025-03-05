@@ -16,12 +16,12 @@ class TestController extends Controller
     public function init()
     {
         parent::init();
-        Yii::$app->user->login(Team::findOne('T02PSQ0FT'));
+        Yii::$app->team->login(Team::findOne('T02PSQ0FT'));
     }
 
     public function actionIndex()
     {
-
+        
         $routine = Yii::createObject(array_merge(
             ['class' => VirtualCoffeeRoutine::class]
         ));

@@ -5,9 +5,10 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\components\filters\auth\BodyParamAuth;
-use yii\filters\AccessControl;
 use yii\web\Response;
+
+use app\components\auth\BodyParamAuth;
+use app\components\auth\TeamAccessControl;
 
 class CommandController extends Controller
 {
@@ -31,7 +32,7 @@ class CommandController extends Controller
                 'class' => BodyParamAuth::class,
             ],
             'access' => [
-                'class' => AccessControl::class,
+                'class' => TeamAccessControl::class,
                 'only' => ['index'],
                 'rules' => [
                     [
@@ -105,4 +106,5 @@ class CommandController extends Controller
         return $command->execute($params['text']);
 
     }
+
 }

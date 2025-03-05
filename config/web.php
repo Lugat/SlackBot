@@ -7,6 +7,7 @@ use app\components\slack\commands\PasswordCommand;
 use app\components\slack\commands\TranslateCommand;
 use app\components\assistant\Mistral;
 use app\components\assistant\PromptEvent;
+use app\components\slack\commands\AskCommand;
 use app\components\translator\Deepl;
 
 $config = [
@@ -35,6 +36,9 @@ $config = [
                 ],
                 '/translate' => [
                     'class' => TranslateCommand::class,
+                ],
+                '/ask' => [
+                    'class' => AskCommand::class,
                 ]
             ]
         ],
@@ -65,9 +69,13 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        'user' => [
-            'identityClass' => 'app\models\Team',
-            'enableAutoLogin' => true,
+        // @todo make it possible to login as user for specific commands or routines
+        /*'user' => [
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => false,
+        ],*/
+        'team' => [
+            'class' => 'app\components\auth\Team',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

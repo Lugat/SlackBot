@@ -3,9 +3,8 @@
 namespace app\components\slack\commands;
 
 use Yii;
-use yii\base\BaseObject;
 
-class TranslateCommand extends BaseObject implements CommandInterface
+class TranslateCommand extends AbstractCommand implements CommandInterface
 {
 
     public function execute(string $text): array|string

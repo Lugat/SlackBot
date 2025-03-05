@@ -28,19 +28,4 @@ class m250221_092205_team extends Migration
 
         return false;
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m250221_092205_team cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

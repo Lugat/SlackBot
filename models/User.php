@@ -17,7 +17,6 @@ use Yii;
 class User extends \yii\db\ActiveRecord
 {
 
-
     /**
      * {@inheritdoc}
      */
@@ -55,12 +54,18 @@ class User extends \yii\db\ActiveRecord
             'last_name' => Yii::t('app', 'Last Name'),
             'team_id' => Yii::t('app', 'Team ID'),
             'birthdate' => Yii::t('app', 'Birthdate'),
+            'admin' => Yii::t('app', 'admin'),
         ];
     }
 
     public function getTeam()
     {
         return $this->hasOne(Team::class, ['id' => 'team_id']);
+    }
+
+    public function getIsAdmin(): bool
+    {
+        return (bool) intval($this->admin);
     }
 
 }

@@ -31,19 +31,4 @@ class m250221_114627_routine extends Migration
 
         return false;
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m250221_114627_schedule cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

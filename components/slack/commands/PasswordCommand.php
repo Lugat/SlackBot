@@ -2,9 +2,7 @@
 
 namespace app\components\slack\commands;
 
-use yii\base\BaseObject;
-
-class PasswordCommand extends BaseObject implements CommandInterface
+class PasswordCommand extends AbstractCommand implements CommandInterface
 {
 
     public int $length;
