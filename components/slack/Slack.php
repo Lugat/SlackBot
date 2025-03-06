@@ -46,7 +46,7 @@ class Slack extends AbstractApi
 
         if (array_key_exists($command, $this->commands)) {
             // @todo merge with custom team config
-            return Yii::createObject($this->commands[$command]);   
+            return Yii::createObject($this->commands[$command]);
         }
         
         return null;

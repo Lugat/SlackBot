@@ -7,6 +7,7 @@ use app\models\Routine;
 
 class RoutineController extends Controller
 {
+    
     public function actionIndex()
     {
 
@@ -20,4 +21,5 @@ class RoutineController extends Controller
         }
 
     }
+
 }

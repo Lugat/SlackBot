@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -14,7 +15,7 @@ use Yii;
  * @property string $team_id
  * @property string|null $birthdate
  */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
 
     /**
@@ -54,7 +55,6 @@ class User extends \yii\db\ActiveRecord
             'last_name' => Yii::t('app', 'Last Name'),
             'team_id' => Yii::t('app', 'Team ID'),
             'birthdate' => Yii::t('app', 'Birthdate'),
-            'admin' => Yii::t('app', 'admin'),
         ];
     }
 
@@ -63,9 +63,30 @@ class User extends \yii\db\ActiveRecord
         return $this->hasOne(Team::class, ['id' => 'team_id']);
     }
 
-    public function getIsAdmin(): bool
+
+    public static function findIdentity($id)
     {
-        return (bool) intval($this->admin);
+        return self::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return null;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->id;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->id === $authKey;
     }
 
 }

@@ -7,6 +7,7 @@ use app\components\slack\commands\PasswordCommand;
 use app\components\slack\commands\TranslateCommand;
 use app\components\assistant\Mistral;
 use app\components\assistant\PromptEvent;
+use app\components\slack\commands\AdminCommand;
 use app\components\slack\commands\AskCommand;
 use app\components\translator\Deepl;
 
@@ -39,6 +40,9 @@ $config = [
                 ],
                 '/ask' => [
                     'class' => AskCommand::class,
+                ],
+                '/admin' => [
+                    'class' => AdminCommand::class,
                 ]
             ]
         ],
@@ -69,11 +73,10 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        // @todo make it possible to login as user for specific commands or routines
-        /*'user' => [
+        'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
-        ],*/
+        ],
         'team' => [
             'class' => 'app\components\auth\Team',
         ],
@@ -85,6 +88,10 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => [],
         ],
         'queue' => require __DIR__ . '/queue.php',
         'db' => require __DIR__ . '/db.php',

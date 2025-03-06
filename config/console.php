@@ -28,6 +28,11 @@ $config = [
             'enableSession' => false,
             'enableAutoLogin' => false,
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => [],
+        ],
+        'queue' => require __DIR__ . '/queue.php',
         'db' => require __DIR__ . '/db.php',
     ],
     'params' => require __DIR__ . '/params.php',

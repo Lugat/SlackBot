@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\Response;
 
+use app\models\User;
 use app\components\auth\BodyParamAuth;
 use app\components\auth\TeamAccessControl;
 use app\components\slack\commands\AbstractCommand;
@@ -93,15 +94,37 @@ class CommandController extends Controller
         
     }
 
+    public function beforeAction($action) : bool
+    {
+
+        $params = Yii::$app->request->getBodyParams();
+
+        $user = User::findOne($params['user_id']);
+        if (null !== $user) {
+            Yii::$app->user->login($user);
+        }
+
+        return parent::beforeAction($action);
+
+    }
+
     public function actionIndex()
     {
 
         $params = Yii::$app->request->getBodyParams();
 
-        $this->command =  Yii::$app->slack->getCommand($params['command']);
+        $this->command = Yii::$app->slack->getCommand($params['command']);
         if (null === $this->command) {
 
             return Yii::t('app', 'Command "{command}" not found.', [
+                'command' => $params['command']
+            ]);
+
+        }
+
+        if (!$this->command->canExecute()) {
+
+            return Yii::t('app', 'You are not allowed to execute "{command}".', [
                 'command' => $params['command']
             ]);
 
