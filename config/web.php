@@ -1,14 +1,7 @@
 <?php
 
-use app\components\slack\Slack;
-use app\components\slack\commands\UuidCommand;
-use app\components\slack\commands\JokeCommand;
-use app\components\slack\commands\PasswordCommand;
-use app\components\slack\commands\TranslateCommand;
 use app\components\assistant\Mistral;
 use app\components\assistant\PromptEvent;
-use app\components\slack\commands\AdminCommand;
-use app\components\slack\commands\AskCommand;
 use app\components\translator\Deepl;
 
 $config = [
@@ -20,32 +13,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-        'slack' => [
-            'class' => Slack::class,
-            'baseUri' => 'https://slack.com/api/',
-            'commands' => [
-                '/uuid' => [
-                    'class' => UuidCommand::class,
-                    'version' => 7
-                ],
-                '/joke' => [
-                    'class' => JokeCommand::class,
-                ],
-                '/password' => [
-                    'class' => PasswordCommand::class,
-                    'length' => 12
-                ],
-                '/translate' => [
-                    'class' => TranslateCommand::class,
-                ],
-                '/ask' => [
-                    'class' => AskCommand::class,
-                ],
-                '/admin' => [
-                    'class' => AdminCommand::class,
-                ]
-            ]
-        ],
+        'slack' => require __DIR__ . '/slack.php',
         'translator' => [
             'class' => Deepl::class,
             'apiKey' => $_ENV['DEEPL_API_KEY'],

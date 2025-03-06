@@ -11,6 +11,7 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
+        'slack' => require __DIR__ . '/slack.php',
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

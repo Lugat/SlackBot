@@ -27,7 +27,7 @@ abstract class AbstractApi extends Component
         ]);
     }
 
-    abstract function getAuthorization(): string;
+    abstract function getAuthorization(): ?string;
 
     public function request(string $method, string $endpoint, array $params = [], array $options = []): array
     {
