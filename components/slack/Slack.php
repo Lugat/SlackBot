@@ -35,6 +35,18 @@ class Slack extends AbstractApi
 
     }
 
+    public function getReactions(string $channel, string $timestamp)
+    {
+
+        $response = $this->request(self::GET, 'reactions.get', [
+            'channel' => $channel,
+            'timestamp' => $timestamp
+        ]);
+
+        return $response['message']['reactions'] ?? [];
+
+    }
+
     public function getUserPresence(string $userId): string
     {
         $response = $this->request(self::GET, 'users.getPresence', ['user' => $userId]);
