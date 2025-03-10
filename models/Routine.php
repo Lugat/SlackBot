@@ -20,6 +20,21 @@ use app\components\slack\MessageJob;
  */
 class Routine extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+
+        $behaviors = parent::behaviors();
+
+        $behaviors[] = [
+            'class' => '\app\components\behaviors\JsonBehavior',
+            'fields' => ['config']
+        ];
+
+        return $behaviors;
+
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -75,7 +90,7 @@ class Routine extends \yii\db\ActiveRecord
 
         $routine = Yii::createObject(array_merge(
             ['class' => $this->class],
-            json_decode($this->config, true)
+            $this->config
         ));
 
         if (null !== $routine) {
